@@ -13,6 +13,7 @@
 						require_once('php/modules/table.php');
 						require_once('php/modules/footer.php');
 						echo "<script src ='js/script.js'></script>";
+						
 			?>
 		</div>
 	</body>
