@@ -1,7 +1,7 @@
 <?php
 class DatabaseController{
   CONST DATABASE_HOST = 'localhost';
-  CONST DATABASE_NAME = 'formdata';
+  CONST DATABASE_NAME = 'visitortable';
   CONST DATABASE_USER = 'clientForm';
   CONST DATABASE_PASSWORD = 'admin';
   public $dbhost;
@@ -31,20 +31,21 @@ class DatabaseController{
       switch ($requestType) {
         case 'POST':
           if($connection->query($query)){
-            echo 'Inserted Successfully, closing connection';
             mysqli_close($connection);
+            return 'Inserted Successfully, closing connection';
           }else{
-            echo 'Insert failed, Reason: ' . $connection->error;
+            return 'Insert failed, Reason: ' . $connection->error;
           }
           break;
         case 'GET' :
-          $result = $connection->query($query);
-
-          if($result->num_rows > 0){
-            while($results = mysqli_fetch_array($result)){
-              echo json_encode($results);
-            }
-            mysqli_close($connection);
+          $returnedQuery = $connection->query($query);
+          $result = array();
+          if($returnedQuery->num_rows > 0){
+              while($results = mysqli_fetch_assoc($returnedQuery)){
+                array_push($result, $results);
+              }
+              mysqli_close($connection);
+              return $result;
           } else {
             echo 'error getting records';
           }

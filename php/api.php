@@ -1,42 +1,30 @@
-
 <?php
-function redirect(){
-  header("Location: http://localhost");
-}
-
 require_once('controllers/DatabaseController.php');
   $requestType = $_SERVER['REQUEST_METHOD'];
+  $result = '';
   switch ($requestType){
     case 'POST':
       $postParameters = file_get_contents('php://input');
-      $arrayParams = str_replace("+", " ", $postParameters);
-      $arrayParams = explode("&", $arrayParams);
+      $userData = json_decode($postParameters);
 
-      $fullname = filter_var($arrayParams[0], FILTER_SANITIZE_STRING);
-      $age = filter_var($arrayParams[1], FILTER_SANITIZE_STRING);
-      $address = filter_var($arrayParams[2], FILTER_SANITIZE_STRING);
-
-      $firstAndLastName = explode(" ", $fullname);
-
-      $firstName = $firstAndLastName[0];
-      $firstName = str_replace("name=", "", $firstName);
-      $address = str_replace("address=", "", $address);
-      $age = str_replace("age=", "", $age);
-      $lastName = $firstAndLastName[1];
+      $name = filter_var($userData->name, FILTER_SANITIZE_STRING);
+      $email = filter_var($userData->email, FILTER_SANITIZE_STRING);
+      $comment = filter_var($userData->comment, FILTER_SANITIZE_STRING);
 
       $dbConnection = new DatabaseController();
       $connection = $dbConnection->connect();
-      $query = "INSERT INTO userdata (FirstName, LastName, Age, Address)".
-               "VALUES('$firstName', '$lastName', '$age', '$address')";
-      $dbConnection->sendQuery($connection, $query, $requestType);
-      redirect();
+      $query = "INSERT INTO visitors (Name, Email, LeftComment)".
+               "VALUES('$name', '$email', '$comment')";
+      $result = $dbConnection->sendQuery($connection, $query, $requestType);
       break;
     case 'GET':
       $dbConnection = new DatabaseController();
-      $connection = $dbConnection -> connect();
-      $query = "select * from userData";
-      $dbConnection->sendQuery($connection, $query, $requestType);
+      $connection = $dbConnection->connect();
+      $query = "select * from visitors";
+      $result = $dbConnection->sendQuery($connection, $query, $requestType);
       break;
     default :
       echo 'No functional method defined';
   }
+
+  exit(json_encode($result));

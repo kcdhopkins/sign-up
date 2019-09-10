@@ -8,12 +8,12 @@
 	</head>
 	<body>
 		<div class="container">
-			<?php require_once('php/modules/nav.php');
+			<?php
+						require_once('php/modules/nav.php');
 						require_once('php/modules/form.php');
 						require_once('php/modules/table.php');
 						require_once('php/modules/footer.php');
 						echo "<script src ='js/script.js'></script>";
-						
 			?>
 		</div>
 	</body>
