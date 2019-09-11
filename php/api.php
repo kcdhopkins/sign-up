@@ -24,7 +24,7 @@ require_once('controllers/DatabaseController.php');
       $result = $dbConnection->sendQuery($connection, $query, $requestType);
       break;
     default :
-      echo 'No functional method defined';
+      $result = 'No functional method defined';
   }
 
   exit(json_encode($result));

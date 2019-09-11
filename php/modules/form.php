@@ -6,5 +6,5 @@
   <input id="email" class = "form inputs" type="text" name="email" value="" placeholder="Enter Age Here" required>
   <span class = "form">Comment: </span>
   <textarea id="comment" class = "form textarea" type="textarea" name="comment" value="" placeholder="Leave a comment"></textarea>
-  <button class="button" onclick="submitForm()">Submit Form</button>
+  <button id='submitButton' class="button submitButton">Submit Form</button>
 </div>
