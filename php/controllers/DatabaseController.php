@@ -21,6 +21,7 @@ class DatabaseController{
 
     if(mysqli_connect_errno()){
       echo 'Failed to connect: Error Code ->' . mysqli_connect_errno();
+      die();
     } else {
       return $connection;
     }
@@ -48,10 +49,12 @@ class DatabaseController{
               return $result;
           } else {
             echo 'error getting records';
+            die();
           }
           break;
         default:
            echo 'no request method indicated';
+           die();
           break;
       }
 

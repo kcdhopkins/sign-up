@@ -53,14 +53,24 @@ footer div{
 }
 
 .button{
-  color: black;
+  color: white;
   border-radius: 25px;
   padding:10px;
-  margin-top: 10px;
   border:solid;
   border-color: green;
   background:grey;
 }
+.submitButton{
+  margin-top: 10px;
+  width:150px;
+}
+
+.refreshButton{
+  margin-top: 20px;
+  margin-left: 125px;
+  width: 150px;
+}
+
 h1{
   margin:15px;
 }

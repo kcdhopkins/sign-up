@@ -6,3 +6,4 @@
     <th>Comment</th>
   </tr>
 </table>
+<button class='button refreshButton' id ='refresh'>Refresh</button>
